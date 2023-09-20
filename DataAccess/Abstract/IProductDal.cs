@@ -9,10 +9,10 @@ namespace DataAccess.Abstract
 {
     public interface IProductDal
     { 
-        List<Product>GetAll();
+        List<Product>GetAll();  // List<Product> dönüş tipidir.
         void Add(Product product);
         void Update(Product product);
         void Delete(Product product);
-         
+        List<Product> GetByCategory(int categoryId);
     }
 }
