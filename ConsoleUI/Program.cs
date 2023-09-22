@@ -13,6 +13,4 @@ foreach (var item in productManager.GetAll())
     Console.WriteLine("Fiyatı:" + item.UnitPrice);
     Console.WriteLine("-------------");
 
-
-
 }

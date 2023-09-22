@@ -3,6 +3,7 @@ using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,9 +56,14 @@ namespace DataAccess.Concrete.InMemory
 
         }
 
-        public List<Product> GetAll()   //buradaki List<Product> return tipidir.
+        public Product Get(Expression<Func<Product, bool>> filter)
         {
-            return _products;          // _products Listesini döndürüyor.
+            throw new NotImplementedException();
+        }
+
+        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
+        {
+            return _products;
         }
 
         public List<Product> GetByCategory(int categoryId)
