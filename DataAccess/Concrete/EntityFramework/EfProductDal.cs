@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,27 +14,50 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Product entity)
         {
-            throw new NotImplementedException();
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                var added = context.Entry(entity);
+                added.State = EntityState.Added;
+                context.SaveChanges();
+            }
         }
 
         public void Delete(Product entity)
         {
-            throw new NotImplementedException();
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                var deleted = context.Entry(entity);
+                deleted.State = EntityState.Deleted;
+                context.SaveChanges();
+            }
         }
 
         public Product Get(Expression<Func<Product, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                return context.Set<Product>().SingleOrDefault(filter);
+            }
         }
 
         public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                return filter == null  
+                    ? context.Set<Product>().ToList()   // Filtre yoksa standart select * from product döndür
+                    : context.Set<Product>().Where(filter).ToList();  // Filtre varsa linq'deki where koşulu içinde döndür
+            }
         }
 
         public void Update(Product entity)
         {
-            throw new NotImplementedException();
+            using (NorthwindContext context = new NorthwindContext())
+            {
+                var updated = context.Entry(entity);
+                updated.State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
     }
 }
