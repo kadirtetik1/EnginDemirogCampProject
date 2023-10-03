@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.DataAccess.EntityFramework;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -10,54 +11,9 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfProductDal : IProductDal
+    public class EfProductDal: EfEntityRepositoryBase<Product, NorthwindContext>, IProductDal
+        
     {
-        public void Add(Product entity)
-        {
-            using (NorthwindContext context = new NorthwindContext())
-            {
-                var added = context.Entry(entity);
-                added.State = EntityState.Added;
-                context.SaveChanges();
-            }
-        }
-
-        public void Delete(Product entity)
-        {
-            using (NorthwindContext context = new NorthwindContext())
-            {
-                var deleted = context.Entry(entity);
-                deleted.State = EntityState.Deleted;
-                context.SaveChanges();
-            }
-        }
-
-        public Product Get(Expression<Func<Product, bool>> filter)
-        {
-            using (NorthwindContext context = new NorthwindContext())
-            {
-                return context.Set<Product>().SingleOrDefault(filter);
-            }
-        }
-
-        public List<Product> GetAll(Expression<Func<Product, bool>> filter = null)
-        {
-            using (NorthwindContext context = new NorthwindContext())
-            {
-                return filter == null  
-                    ? context.Set<Product>().ToList()   // Filtre yoksa standart select * from product döndür
-                    : context.Set<Product>().Where(filter).ToList();  // Filtre varsa linq'deki where koşulu içinde döndür
-            }
-        }
-
-        public void Update(Product entity)
-        {
-            using (NorthwindContext context = new NorthwindContext())
-            {
-                var updated = context.Entry(entity);
-                updated.State = EntityState.Modified;
-                context.SaveChanges();
-            }
-        }
+       
     }
 }
