@@ -14,5 +14,7 @@ namespace Business.Abstract
         List<Product> GetAllByCategoryId(int id);
         List<Product> GetAllByPriceRange(decimal min, decimal max);
         List<ProductDetailDTO> GetProductDetails();
+        Product GetById(int ProductId);
+        void Add(Product product);
     }
 }
