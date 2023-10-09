@@ -3,19 +3,20 @@ using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using System.Net.Http.Headers;
 
-//ProductTest();
+ProductTest();
 
 static void ProductTest()
 {
     ProductManager productManager = new ProductManager(new EfProductDal());
 
 
-    foreach (var item in productManager.GetAllByPriceRange(50, 100))
+    foreach (var item in productManager.GetProductDetails())
     {
 
         Console.WriteLine("Ürün:" + item.ProductName);
         Console.WriteLine("Fiyatı:" + item.UnitPrice);
-        Console.WriteLine("Kategori:" + item.CategoryId);
+        Console.WriteLine("Stok Adedi:" + item.UnitsInStock);
+        Console.WriteLine("Kategori:" + item.CategoryName);
         Console.WriteLine("-------------");
 
     }
