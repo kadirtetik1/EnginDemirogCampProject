@@ -9,8 +9,10 @@ static void ProductTest()
 {
     ProductManager productManager = new ProductManager(new EfProductDal());
 
+    var result = productManager.GetProductDetails().Data;
 
-    foreach (var item in productManager.GetProductDetails())
+
+    foreach (var item in productManager.GetProductDetails().Data)
     {
 
         Console.WriteLine("Ürün:" + item.ProductName);
