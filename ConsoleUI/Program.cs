@@ -9,19 +9,27 @@ static void ProductTest()
 {
     ProductManager productManager = new ProductManager(new EfProductDal());
 
-    var result = productManager.GetProductDetails().Data;
+    var result = productManager.GetProductDetails();
 
+    //if(result.Success == true)
+    //{
+        foreach (var item in result.Data)
+        {
 
-    foreach (var item in productManager.GetProductDetails().Data)
-    {
+            Console.WriteLine("Ürün:" + item.ProductName);
+            Console.WriteLine("Fiyatı:" + item.UnitPrice);
+            Console.WriteLine("Stok Adedi:" + item.UnitsInStock);
+            Console.WriteLine("Kategori:" + item.CategoryName);
+            Console.WriteLine("-------------");
 
-        Console.WriteLine("Ürün:" + item.ProductName);
-        Console.WriteLine("Fiyatı:" + item.UnitPrice);
-        Console.WriteLine("Stok Adedi:" + item.UnitsInStock);
-        Console.WriteLine("Kategori:" + item.CategoryName);
-        Console.WriteLine("-------------");
+        }
+    //}
 
-    }
+    //else
+    //{
+    //    Console.WriteLine(result.Message);
+    //}
+    
 }
 
 //CategoryTest();
