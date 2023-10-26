@@ -1,3 +1,6 @@
+using Business.Abstract;
+using Business.Concrete;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -15,6 +18,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+builder.Services.AddSingleton<IProductService, ProductManager>();
 
 app.UseHttpsRedirection();
 

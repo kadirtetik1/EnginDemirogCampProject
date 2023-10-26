@@ -31,7 +31,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Product>> GetAll()
         {
-            if(DateTime.Now.Hour == 16)  // Saat 16'da bakımda mesajı yazdırılacak
+            if(DateTime.Now.Hour == 11)  // Saat 11'de bakım mesajı yazdırılacak
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
